@@ -1,5 +1,5 @@
-﻿using Integral.Components;
-using Integral.Compositions;
+﻿using Integral.Abilities;
+using Integral.Statistics;
 
 namespace Integral.Items
 {
@@ -8,12 +8,12 @@ namespace Integral.Items
         where AbilityKey : notnull
         where StatisticKey : notnull
     {
-        private readonly StatisticComponent<StatisticKey> statisticComponent;
+        private readonly Statistic<StatisticKey> statistic;
 
-        internal EquipableItem(ItemKey itemKey, AbilityComponent<AbilityKey> abilityComponent, StatisticComponent<StatisticKey> statisticComponent)
-            : base(itemKey, abilityComponent) => this.statisticComponent = statisticComponent;
+        internal EquipableItem(ItemKey itemKey, Ability<AbilityKey> ability, Statistic<StatisticKey> statistic)
+            : base(itemKey, ability) => this.statistic = statistic;
 
-        public override void Use(Composition composition)
+        public override void Use()
         {
         }
     }

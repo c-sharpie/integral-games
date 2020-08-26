@@ -19,7 +19,7 @@ namespace Integral.Tests
             GenericPublisher<float> primaryStatisticPublisher2 = new GenericPublisher<float>();
             GenericPublisher<float> primaryStatisticPublisher3 = new GenericPublisher<float>();
 
-            void Assemble(StatisticComponentAssembler<TestStatistics> statisticsComponentAssembler)
+            void Assemble(StatisticAssembler<TestStatistics> statisticsComponentAssembler)
             {
                 statisticsComponentAssembler.AddDelegated(TestStatistics.Secondary, primaryStatisticPublisher1);
                 statisticsComponentAssembler.AddDelegated(TestStatistics.SourcedSecondary, primaryStatisticPublisher2);
@@ -27,7 +27,7 @@ namespace Integral.Tests
                 statisticsComponentAssembler.AddMultiplied(TestStatistics.TotalSecondary, TestStatistics.Secondary, TestStatistics.SourcedSecondary, TestStatistics.ScaledSecondary);
             }
 
-            StatisticComponentBuilder<TestStatistics> statisticComponentBuilder = new StatisticComponentBuilder<TestStatistics>();
+            StatisticBuilder<TestStatistics> statisticComponentBuilder = new StatisticBuilder<TestStatistics>();
             StatisticComponent<TestStatistics> statisticComponent = statisticComponentBuilder.Build(Assemble);
 
             const int iterations = 1000, count = 10, max = 10;
@@ -58,7 +58,7 @@ namespace Integral.Tests
             GenericPublisher<float> experiencePublisher = new GenericPublisher<float>();
             GenericPublisher<float> primaryStatisticPublisher = new GenericPublisher<float>();
 
-            void Assemble(StatisticComponentAssembler<TestStatistics> statisticsComponentAssembler)
+            void Assemble(StatisticAssembler<TestStatistics> statisticsComponentAssembler)
             {
                 statisticsComponentAssembler.AddDelegated(TestStatistics.Experience, experiencePublisher);
                 statisticsComponentAssembler.AddCalculated(TestStatistics.Level, TestStatistics.Experience, new TestLevelFormula());
@@ -73,7 +73,7 @@ namespace Integral.Tests
                 statisticsComponentAssembler.AddSummed(TestStatistics.TotalSecondary, TestStatistics.Secondary, TestStatistics.SourcedSecondary);
             }
 
-            StatisticComponentBuilder<TestStatistics> statisticComponentBuilder = new StatisticComponentBuilder<TestStatistics>();
+            StatisticBuilder<TestStatistics> statisticComponentBuilder = new StatisticBuilder<TestStatistics>();
             StatisticComponent<TestStatistics> statisticComponent = statisticComponentBuilder.Build(Assemble);
 
             experiencePublisher.Publish(1000);

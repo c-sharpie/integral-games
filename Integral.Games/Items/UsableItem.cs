@@ -1,5 +1,4 @@
-﻿using Integral.Components;
-using Integral.Compositions;
+﻿using Integral.Abilities;
 
 namespace Integral.Items
 {
@@ -7,11 +6,11 @@ namespace Integral.Items
         where ItemKey : notnull
         where AbilityKey : notnull
     {
-        private readonly AbilityComponent<AbilityKey> abilityComponent;
+        private readonly Ability<AbilityKey> ability;
 
-        internal UsableItem(ItemKey itemKey, AbilityComponent<AbilityKey> abilityComponent) : base(itemKey) => this.abilityComponent = abilityComponent;
+        internal UsableItem(ItemKey itemKey, Ability<AbilityKey> ability) : base(itemKey) => this.ability = ability;
 
-        public virtual void Use(Composition composition)
+        public virtual void Use()
         {
         }
     }

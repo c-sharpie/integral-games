@@ -1,7 +1,6 @@
 ﻿using Integral.Abilities;
 using Integral.Actors;
 using Integral.Builders;
-using Integral.Components;
 using Integral.Enumerations;
 using Integral.Factories;
 using Integral.Timers;
@@ -22,11 +21,11 @@ namespace Integral.Tests
 
             AbilityFactory<AbilityType> abilityFactory = new AbilityFactory<AbilityType>(AbilityType.Active);
             abilityFactory.AbilityType = AbilityType.Active;
-            abilityFactory.Consumer = testActor;
-            abilityFactory.Registry = testActor;
+            //abilityFactory.Consumer = testActor;
+            //abilityFactory.Registry = testActor;
             Ability<AbilityType> ability = abilityFactory.Create();
 
-            AbilityComponentBuilder<AbilityType> abilityComponentBuilder = new AbilityComponentBuilder<AbilityType>();
+            AbilityBuilder<AbilityType> abilityComponentBuilder = new AbilityBuilder<AbilityType>();
             AbilityComponent<AbilityType> abilityComponent = abilityComponentBuilder.Build(x => { });
             abilityComponent.Add(ability);
 
@@ -44,11 +43,11 @@ namespace Integral.Tests
 
             AbilityFactory<AbilityType> abilityFactory = new AbilityFactory<AbilityType>(AbilityType.Passive);
             abilityFactory.AbilityType = AbilityType.Passive;
-            abilityFactory.Consumer = testActor;
-            abilityFactory.Registry = testActor;
+            //abilityFactory.Consumer = testActor;
+            //abilityFactory.Registry = testActor;
             Ability<AbilityType> ability = abilityFactory.Create();
 
-            AbilityComponentBuilder<AbilityType> abilityComponentBuilder = new AbilityComponentBuilder<AbilityType>();
+            AbilityBuilder<AbilityType> abilityComponentBuilder = new AbilityBuilder<AbilityType>();
             AbilityComponent<AbilityType> abilityComponent = abilityComponentBuilder.Build(x => { });
             abilityComponent.Add(ability);
 

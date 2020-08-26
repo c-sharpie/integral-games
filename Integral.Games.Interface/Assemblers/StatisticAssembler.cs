@@ -3,7 +3,7 @@ using Integral.Publishers;
 
 namespace Integral.Assemblers
 {
-    public interface StatisticComponentAssembler<in T>
+    public interface StatisticAssembler<in T>
     {
         void AddConstant(T statistic, float value);
 
