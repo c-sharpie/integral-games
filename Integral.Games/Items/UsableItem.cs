@@ -2,13 +2,11 @@
 
 namespace Integral.Items
 {
-    internal class UsableItem<ItemKey, AbilityKey> : InventoryItem<ItemKey>
-        where ItemKey : notnull
-        where AbilityKey : notnull
+    internal class UsableItem : InventoryItem
     {
-        private readonly Ability<AbilityKey> ability;
+        private readonly Ability ability;
 
-        internal UsableItem(ItemKey itemKey, Ability<AbilityKey> ability) : base(itemKey) => this.ability = ability;
+        public UsableItem(Ability ability) => this.ability = ability;
 
         public virtual void Use()
         {

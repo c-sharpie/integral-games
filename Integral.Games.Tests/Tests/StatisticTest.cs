@@ -1,10 +1,7 @@
-﻿using System;
-using Integral.Assemblers;
-using Integral.Builders;
-using Integral.Components;
-using Integral.Enumerations;
+﻿using Integral.Builders;
 using Integral.Formulae;
 using Integral.Publishers;
+using Integral.Statistics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Integral.Tests
@@ -13,74 +10,31 @@ namespace Integral.Tests
     public class StatisticTest
     {
         [TestMethod]
-        public void MultiplicationTest()
-        {
-            GenericPublisher<float> primaryStatisticPublisher1 = new GenericPublisher<float>();
-            GenericPublisher<float> primaryStatisticPublisher2 = new GenericPublisher<float>();
-            GenericPublisher<float> primaryStatisticPublisher3 = new GenericPublisher<float>();
-
-            void Assemble(StatisticAssembler<TestStatistics> statisticsComponentAssembler)
-            {
-                statisticsComponentAssembler.AddDelegated(TestStatistics.Secondary, primaryStatisticPublisher1);
-                statisticsComponentAssembler.AddDelegated(TestStatistics.SourcedSecondary, primaryStatisticPublisher2);
-                statisticsComponentAssembler.AddDelegated(TestStatistics.ScaledSecondary, primaryStatisticPublisher3);
-                statisticsComponentAssembler.AddMultiplied(TestStatistics.TotalSecondary, TestStatistics.Secondary, TestStatistics.SourcedSecondary, TestStatistics.ScaledSecondary);
-            }
-
-            StatisticBuilder<TestStatistics> statisticComponentBuilder = new StatisticBuilder<TestStatistics>();
-            StatisticComponent<TestStatistics> statisticComponent = statisticComponentBuilder.Build(Assemble);
-
-            const int iterations = 1000, count = 10, max = 10;
-            Random random = new Random();
-            float[] values = new float[count];
-            for (int i = 0; i < count; i++)
-            {
-                values[i] = random.Next() % max;
-            }
-
-            for (int i = 0; i < iterations; i++)
-            {
-                float value1 = values[i % count];
-                float value2 = values[(i + 1) % count];
-                float value3 = values[(i + 2) % count];
-                primaryStatisticPublisher1.Publish(value1);
-                primaryStatisticPublisher2.Publish(value2);
-                primaryStatisticPublisher3.Publish(value3);
-                float result1 = value1 * value2 * value3;
-                float result2 = statisticComponent[TestStatistics.TotalSecondary].Value;
-                Assert.AreEqual(result1, result2);
-            }
-        }
-
-        [TestMethod]
-        public void CollectionTest()
+        public void BuilderTest()
         {
             GenericPublisher<float> experiencePublisher = new GenericPublisher<float>();
-            GenericPublisher<float> primaryStatisticPublisher = new GenericPublisher<float>();
+            GenericPublisher<float> primaryPublisher = new GenericPublisher<float>();
 
-            void Assemble(StatisticAssembler<TestStatistics> statisticsComponentAssembler)
+            StatisticBuilder statisticBuilder = new StatisticBuilder();
+            Statistic experience = statisticBuilder.Build(statisticAssembler => statisticAssembler.Add(experiencePublisher));
+            Statistic level = statisticBuilder.Build(statisticAssembler =>
             {
-                statisticsComponentAssembler.AddDelegated(TestStatistics.Experience, experiencePublisher);
-                statisticsComponentAssembler.AddCalculated(TestStatistics.Level, TestStatistics.Experience, new TestLevelFormula());
+                statisticAssembler.Add(experience);
+                statisticAssembler.Calculate(new TestLevelFormula());
+            });
 
-                statisticsComponentAssembler.AddDelegated(TestStatistics.Primary, primaryStatisticPublisher);
-                statisticsComponentAssembler.AddSummed(TestStatistics.SourcedPrimary);
-                statisticsComponentAssembler.AddSummed(TestStatistics.TotalPrimary, TestStatistics.Primary, TestStatistics.SourcedPrimary);
-
-                statisticsComponentAssembler.AddConstant(TestStatistics.Secondary, 0.5f);
-                statisticsComponentAssembler.AddMultiplied(TestStatistics.ScaledSecondary, TestStatistics.Secondary, TestStatistics.Level);
-                statisticsComponentAssembler.AddSummed(TestStatistics.SourcedSecondary);
-                statisticsComponentAssembler.AddSummed(TestStatistics.TotalSecondary, TestStatistics.Secondary, TestStatistics.SourcedSecondary);
-            }
-
-            StatisticBuilder<TestStatistics> statisticComponentBuilder = new StatisticBuilder<TestStatistics>();
-            StatisticComponent<TestStatistics> statisticComponent = statisticComponentBuilder.Build(Assemble);
+            Statistic primary = statisticBuilder.Build(statisticAssembler => statisticAssembler.Add(primaryPublisher));
+            Statistic secondary = statisticBuilder.Build(statisticAssembler =>
+            {
+                statisticAssembler.Multiply(primary);
+                statisticAssembler.Multiply(2);
+            });
 
             experiencePublisher.Publish(1000);
-            primaryStatisticPublisher.Publish(5);
-            Assert.AreEqual(statisticComponent[TestStatistics.Level].Value, 4);
-            Assert.AreEqual(statisticComponent[TestStatistics.Secondary].Value, 0.5);
-            Assert.AreEqual(statisticComponent[TestStatistics.ScaledSecondary].Value, 2);
+            primaryPublisher.Publish(2);
+
+            Assert.AreEqual(level.Value, 4);
+            Assert.AreEqual(secondary.Value, 2 * 2);
         }
     }
 }

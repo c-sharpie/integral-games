@@ -3,10 +3,9 @@ using Integral.Subscribers;
 
 namespace Integral.Statistics
 {
-    internal sealed class DelegatedStatistic<Key> : ObservedStatistic<Key>, Subscriber<float>
-        where Key : notnull
+    internal sealed class DelegatedStatistic : ObservedStatistic, Subscriber<float>
     {
-        internal DelegatedStatistic(Key key, Publisher<float> publisher, float value = default) : base(key, value) => publisher.OnPublish += OnPublished;
+        internal DelegatedStatistic(Publisher<float> publisher, float value = default) : base(value) => publisher.OnPublish += OnPublished;
 
         public void OnPublished(float value) => Value = value;
     }

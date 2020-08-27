@@ -1,10 +1,6 @@
 ﻿namespace Integral.Abilities
 {
-    internal sealed class PassiveAbility<Key> : ActiveAbility<Key>
-        where Key : notnull
+    public class PassiveAbility : ActiveAbility
     {
-        internal PassiveAbility(Key key) : base(key)
-        {
-        }
     }
 }

@@ -4,21 +4,27 @@ using Integral.Assemblers;
 
 namespace Integral.Builders
 {
-    public sealed class AbilityBuilder<Key> : Builder<Ability<Key>, AbilityAssembler<Key>>, AbilityAssembler<Key>
-        where Key : notnull
+    public sealed class AbilityBuilder : Builder<Ability, AbilityAssembler>
     {
-        public Ability<Key> Build(Action<AbilityAssembler<Key>> action)
+        public Ability Build(Action<AbilityAssembler> abilityAssemblerAction)
         {
-            action(this);
+            Assembler assembler = new Assembler();
+            abilityAssemblerAction(assembler);
+            return assembler.Assemble();
+        }
 
-            //return AbilityType switch
-            //{
-            //    AbilityType.Active => new ActiveAbility<Key>(Identity),
-            //    AbilityType.Passive => new PassiveAbility<Key>(Identity),
-            //    _ => throw new NotImplementedException()
-            //};
-
-            return null;
+        private sealed class Assembler : AbilityAssembler
+        {
+            internal Ability Assemble()
+            {
+                //return AbilityType switch
+                //{
+                //    AbilityType.Active => new ActiveAbility<Key>(Identity),
+                //    AbilityType.Passive => new PassiveAbility<Key>(Identity),
+                //    _ => throw new NotImplementedException()
+                //};
+                return null;
+            }
         }
     }
 }

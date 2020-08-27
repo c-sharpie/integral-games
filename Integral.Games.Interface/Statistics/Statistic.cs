@@ -1,10 +1,8 @@
-﻿using Integral.Abstractions;
-using Integral.Observers;
+﻿using Integral.Observers;
 
 namespace Integral.Statistics
 {
-    public interface Statistic<out Key> : Identifiable<Key>, Observer<float>
-        where Key : notnull
+    public interface Statistic : Observer<float>
     {
         float Value { get; }
     }

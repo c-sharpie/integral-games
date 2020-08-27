@@ -1,18 +1,23 @@
 ﻿using Integral.Formulae;
 using Integral.Publishers;
+using Integral.Statistics;
 
 namespace Integral.Assemblers
 {
-    public interface StatisticAssembler<in T>
+    public interface StatisticAssembler
     {
-        void AddConstant(T statistic, float value);
+        void Add(float value);
 
-        void AddSummed(T statistic, params T[] sources);
+        void Add(Publisher<float> publisher, float value = 0);
 
-        void AddMultiplied(T statistic, params T[] sources);
+        void Add(Statistic statistic);
 
-        void AddDelegated(T statistic, Publisher<float> publisher);
+        void Multiply(float value);
 
-        void AddCalculated(T statistic, T source, StatisticFormula<float> formula);
+        void Multiply(Publisher<float> publisher, float value = 0);
+
+        void Multiply(Statistic statistic);
+
+        void Calculate(DeltaFormula<float> formula, float value = 0);
     }
 }

@@ -1,11 +1,8 @@
-﻿using Integral.Abstractions;
-using Integral.Commands;
-using Integral.Notifiers;
+﻿using Integral.Commands;
 
 namespace Integral.Abilities
 {
-    public interface Ability<out Key> : Identifiable<Key>, Notifier, Command
-        where Key : notnull
+    public interface Ability : Command
     {
     }
 }

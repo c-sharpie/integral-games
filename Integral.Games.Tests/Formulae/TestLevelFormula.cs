@@ -2,7 +2,7 @@
 
 namespace Integral.Formulae
 {
-    internal sealed class TestLevelFormula : StatisticFormula<float>
+    internal sealed class TestLevelFormula : DeltaFormula<float>
     {
         private const float ExperiencePower = 2, ExperienceMultiplier = 100;
 

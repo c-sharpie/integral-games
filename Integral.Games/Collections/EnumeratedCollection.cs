@@ -3,11 +3,11 @@ using Integral.Functions;
 
 namespace Integral.Collections
 {
-    public class EnumIdentityCollection<Key, Element> : IndexedCollection<Key, Element>
+    public class EnumeratedCollection<Key, Element> : IndexedCollection<Key, Element>
         where Key : notnull, Enum
         where Element : notnull
     {
-        protected EnumIdentityCollection()
+        protected EnumeratedCollection()
         {
             foreach (Key enumeration in EnumFunction.GetValues<Key>())
             {

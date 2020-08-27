@@ -2,11 +2,10 @@
 
 namespace Integral.Statistics
 {
-    internal class ObservedStatistic<Key> : ValueObserver<float>, Statistic<Key>
-        where Key : notnull
+    internal class ObservedStatistic : ValueObserver<float>, Statistic
     {
-        internal ObservedStatistic(Key key, float value = default) : base(value) => Identity = key;
-
-        public Key Identity { get; }
+        internal ObservedStatistic(float value = default) : base(value)
+        {
+        }
     }
 }

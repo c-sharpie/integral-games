@@ -2,18 +2,16 @@
 
 namespace Integral.Statistics
 {
-    internal class CalculatedStatistic<Key> : ObservedStatistic<Key>
-        where Key : notnull
+    internal class CalculatedStatistic : ObservedStatistic
     {
-        private readonly StatisticFormula<float> statisticFormula;
+        private readonly DeltaFormula<float> deltaFormula;
 
-        internal CalculatedStatistic(Key key, StatisticFormula<float> statisticFormula, Statistic<Key> statistic, float value = default)
-            : base(key, statisticFormula.Evaluate(value, statistic.Value))
+        internal CalculatedStatistic(DeltaFormula<float> deltaFormula, Statistic statistic, float value = default) : base(deltaFormula.Evaluate(value, statistic.Value))
         {
-            this.statisticFormula = statisticFormula;
+            this.deltaFormula = deltaFormula;
             statistic.OnChange += Change;
         }
 
-        private void Change(float previousValue, float currentValue) => Value = statisticFormula.Evaluate(previousValue, currentValue);
+        private void Change(float previousValue, float currentValue) => Value = deltaFormula.Evaluate(previousValue, currentValue);
     }
 }
