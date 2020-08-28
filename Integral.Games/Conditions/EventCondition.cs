@@ -4,7 +4,7 @@ namespace Integral.Conditions
 {
     public abstract class EventCondition : PublishedCondition
     {
-        internal EventCondition(Notifier notifier) => notifier.OnNotify += OnEvent;
+        protected EventCondition(Notifier notifier) => notifier.OnNotify += OnEvent;
 
         protected abstract bool Validate();
 

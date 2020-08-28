@@ -2,11 +2,11 @@
 
 namespace Integral.Statistics
 {
-    internal class CalculatedStatistic : ObservedStatistic
+    public class CalculatedStatistic : ObservedStatistic
     {
         private readonly DeltaFormula<float> deltaFormula;
 
-        internal CalculatedStatistic(DeltaFormula<float> deltaFormula, Statistic statistic, float value = default) : base(deltaFormula.Evaluate(value, statistic.Value))
+        public CalculatedStatistic(DeltaFormula<float> deltaFormula, Statistic statistic, float value = default) : base(deltaFormula.Evaluate(value, statistic.Value))
         {
             this.deltaFormula = deltaFormula;
             statistic.OnChange += Change;

@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
+using Integral.Registries;
 
 namespace Integral.Statistics
 {
-    internal abstract class AggregateStatistic : ObservedStatistic
+    public abstract class AggregateStatistic : ObservedStatistic, Registry<Statistic>
     {
-        internal AggregateStatistic(IEnumerable<Statistic> statistics, float value = default) : base(value)
+        public AggregateStatistic(IEnumerable<Statistic> statistics, float value = default) : base(value)
         {
             foreach (Statistic statistic in statistics)
             {
-                Subscribe(statistic);
+                Register(statistic);
             }
         }
 
-        internal abstract void Subscribe(Statistic statistic);
+        public abstract void Register(Statistic statistic);
 
-        internal abstract void Unsubscribe(Statistic statistic);
+        public abstract void Unregister(Statistic statistic);
     }
 }

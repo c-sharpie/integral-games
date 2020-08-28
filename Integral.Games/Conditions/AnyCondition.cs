@@ -2,11 +2,11 @@
 
 namespace Integral.Conditions
 {
-    public class AnyCondition : PublishedCondition, DirectAggregate<Condition>
+    public sealed class AnyCondition : PublishedCondition, DirectAggregate<Condition>
     {
         private int active;
 
-        public AnyCondition(bool @default = default) : base(@default)
+        public AnyCondition(bool value = default) : base(value)
         {
         }
 

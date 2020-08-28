@@ -1,12 +1,12 @@
 ﻿namespace Integral.Timers
 {
-    internal sealed class AutomaticTimer : IntervalTimer
+    public sealed class AutomaticTimer : IntervalTimer
     {
         private readonly double interval;
 
         private double current;
 
-        internal AutomaticTimer(double interval) => this.interval = interval;
+        public AutomaticTimer(double interval) => this.interval = interval;
 
         public override void Elapse(double time)
         {

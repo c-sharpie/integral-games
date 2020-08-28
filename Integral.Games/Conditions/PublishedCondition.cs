@@ -4,7 +4,7 @@ namespace Integral.Conditions
 {
     public abstract class PublishedCondition : ValuePublisher<bool>, Condition
     {
-        protected PublishedCondition(bool @default = default) : base(@default)
+        protected PublishedCondition(bool value = default) : base(value)
         {
         }
 

@@ -2,7 +2,7 @@
 
 namespace Integral.Timers
 {
-    internal abstract class IntervalTimer : Timer
+    public abstract class IntervalTimer : Timer
     {
         public event Action? OnNotify;
 

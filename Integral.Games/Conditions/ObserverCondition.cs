@@ -5,7 +5,7 @@ namespace Integral.Conditions
     public abstract class ObserverCondition<Observable> : PublishedCondition
         where Observable : notnull
     {
-        internal ObserverCondition(Observer<Observable> observer) => observer.OnChange += OnChange;
+        protected ObserverCondition(Observer<Observable> observer) => observer.OnChange += OnChange;
 
         protected abstract bool Evaluate(Observable previous, Observable current);
 

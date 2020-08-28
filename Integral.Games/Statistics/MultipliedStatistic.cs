@@ -2,17 +2,17 @@
 
 namespace Integral.Statistics
 {
-    internal sealed class MultipliedStatistic : AggregateStatistic
+    public sealed class MultipliedStatistic : AggregateStatistic
     {
         private int zeroes;
 
         private float value = 1.0f;
 
-        internal MultipliedStatistic(IEnumerable<Statistic> statistics) : base(statistics)
+        public MultipliedStatistic(IEnumerable<Statistic> statistics) : base(statistics)
         {
         }
 
-        internal override void Subscribe(Statistic statistic)
+        public override void Register(Statistic statistic)
         {
             statistic.OnChange += Change;
             if (statistic.Value != 0)
@@ -25,7 +25,7 @@ namespace Integral.Statistics
             }
         }
 
-        internal override void Unsubscribe(Statistic statistic)
+        public override void Unregister(Statistic statistic)
         {
             statistic.OnChange -= Change;
             if (statistic.Value != 0)

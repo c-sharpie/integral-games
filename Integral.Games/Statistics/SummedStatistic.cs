@@ -2,19 +2,19 @@
 
 namespace Integral.Statistics
 {
-    internal sealed class SummedStatistic : AggregateStatistic
+    public sealed class SummedStatistic : AggregateStatistic
     {
-        internal SummedStatistic(IEnumerable<Statistic> statistics) : base(statistics)
+        public SummedStatistic(IEnumerable<Statistic> statistics) : base(statistics)
         {
         }
 
-        internal override void Subscribe(Statistic statistic)
+        public override void Register(Statistic statistic)
         {
             statistic.OnChange += Change;
             Value += statistic.Value;
         }
 
-        internal override void Unsubscribe(Statistic statistic)
+        public override void Unregister(Statistic statistic)
         {
             statistic.OnChange -= Change;
             Value -= statistic.Value;
