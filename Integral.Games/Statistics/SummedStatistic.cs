@@ -4,6 +4,10 @@ namespace Integral.Statistics
 {
     public sealed class SummedStatistic : AggregateStatistic
     {
+        public SummedStatistic()
+        {
+        }
+
         public SummedStatistic(IEnumerable<Statistic> statistics) : base(statistics)
         {
         }

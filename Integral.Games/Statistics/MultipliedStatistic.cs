@@ -8,6 +8,10 @@ namespace Integral.Statistics
 
         private float value = 1.0f;
 
+        public MultipliedStatistic()
+        {
+        }
+
         public MultipliedStatistic(IEnumerable<Statistic> statistics) : base(statistics)
         {
         }

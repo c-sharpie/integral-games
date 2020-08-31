@@ -5,6 +5,10 @@ namespace Integral.Statistics
 {
     public abstract class AggregateStatistic : ObservedStatistic, Registry<Statistic>
     {
+        public AggregateStatistic()
+        {
+        }
+
         public AggregateStatistic(IEnumerable<Statistic> statistics, float value = default) : base(value)
         {
             foreach (Statistic statistic in statistics)
