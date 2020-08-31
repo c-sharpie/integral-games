@@ -11,16 +11,14 @@ namespace Integral.Tests
         [TestMethod]
         public void Test()
         {
-            GenericPublisher<float> experiencePublisher = new GenericPublisher<float>();
-            GenericPublisher<float> healthMultiplierPublisher = new GenericPublisher<float>();
+            GenericPublisher<int> experiencePublisher = new GenericPublisher<int>();
+            GenericPublisher<int> healthMultiplierPublisher = new GenericPublisher<int>();
 
-            Statistic experience = new DelegatedStatistic(experiencePublisher);
+            Statistic experience = new DelegatedStatistic(experiencePublisher, 1000);
             Statistic level = new CalculatedStatistic(new TestLevelFormula(), experience);
 
             Statistic healthMultiplier = new DelegatedStatistic(healthMultiplierPublisher, 200);
             Statistic health = new MultipliedStatistic(new[] { level, healthMultiplier });
-
-            experiencePublisher.Publish(1000);
 
             Assert.AreEqual(level.Value, 4);
             Assert.AreEqual(health.Value, level.Value * 200);

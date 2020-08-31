@@ -24,6 +24,6 @@ namespace Integral.Statistics
             Value -= statistic.Value;
         }
 
-        private void Change(float previousValue, float currentValue) => Value += currentValue - previousValue;
+        private void Change(int previousValue, int currentValue) => Value += currentValue - previousValue;
     }
 }

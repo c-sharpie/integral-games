@@ -6,7 +6,7 @@ namespace Integral.Statistics
     {
         private int zeroes;
 
-        private float value = 1.0f;
+        private int value = 1;
 
         public MultipliedStatistic()
         {
@@ -42,7 +42,7 @@ namespace Integral.Statistics
             }
         }
 
-        private void Change(float previousValue, float currentValue)
+        private void Change(int previousValue, int currentValue)
         {
             if (currentValue != 0)
             {
@@ -66,7 +66,7 @@ namespace Integral.Statistics
             }
         }
 
-        private void SetValue(float value)
+        private void SetValue(int value)
         {
             this.value = value;
             if (zeroes == 0)

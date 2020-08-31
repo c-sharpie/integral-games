@@ -4,14 +4,14 @@ namespace Integral.Statistics
 {
     public class CalculatedStatistic : ObservedStatistic
     {
-        private readonly DeltaFormula<float> deltaFormula;
+        private readonly DeltaFormula<int> deltaFormula;
 
-        public CalculatedStatistic(DeltaFormula<float> deltaFormula, Statistic statistic, float value = default) : base(deltaFormula.Evaluate(value, statistic.Value))
+        public CalculatedStatistic(DeltaFormula<int> deltaFormula, Statistic statistic, int value = default) : base(deltaFormula.Evaluate(value, statistic.Value))
         {
             this.deltaFormula = deltaFormula;
             statistic.OnChange += Change;
         }
 
-        private void Change(float previousValue, float currentValue) => Value = deltaFormula.Evaluate(previousValue, currentValue);
+        private void Change(int previousValue, int currentValue) => Value = deltaFormula.Evaluate(previousValue, currentValue);
     }
 }

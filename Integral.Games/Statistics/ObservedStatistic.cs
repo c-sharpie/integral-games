@@ -2,9 +2,9 @@
 
 namespace Integral.Statistics
 {
-    public class ObservedStatistic : ValueObserver<float>, Statistic
+    public class ObservedStatistic : ValueObserver<int>, Statistic
     {
-        public ObservedStatistic(float value = default) : base(value)
+        public ObservedStatistic(int value = default) : base(value)
         {
         }
     }

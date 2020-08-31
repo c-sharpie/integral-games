@@ -9,7 +9,7 @@ namespace Integral.Statistics
         {
         }
 
-        public AggregateStatistic(IEnumerable<Statistic> statistics, float value = default) : base(value)
+        public AggregateStatistic(IEnumerable<Statistic> statistics, int value = default) : base(value)
         {
             foreach (Statistic statistic in statistics)
             {

@@ -2,8 +2,8 @@
 
 namespace Integral.Statistics
 {
-    public interface Statistic : Observer<float>
+    public interface Statistic : Observer<int>
     {
-        float Value { get; }
+        int Value { get; }
     }
 }
