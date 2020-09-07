@@ -1,19 +1,16 @@
-﻿using Integral.Observers;
-
-namespace Integral.Statistics
+﻿namespace Integral.Statistics
 {
-    public sealed class MultipliedStatistic : ValueObserver<int>, AggregateStatistic
+    public sealed class MultipliedStatistic : RegisteredStatistic
     {
         private int zeroes;
 
         private int value = 1;
 
-        public void Register(ObservedStatistic observedStatistic)
+        public override void Register(Statistic statistic)
         {
-            observedStatistic.OnChange += Change;
-            if (observedStatistic.Value != 0)
+            if (statistic.Value != 0)
             {
-                SetValue(value * observedStatistic.Value);
+                SetValue(value * statistic.Value);
             }
             else if (++zeroes == 1)
             {
@@ -21,12 +18,11 @@ namespace Integral.Statistics
             }
         }
 
-        public void Unregister(ObservedStatistic observedStatistic)
+        public override void Unregister(Statistic statistic)
         {
-            observedStatistic.OnChange -= Change;
-            if (observedStatistic.Value != 0)
+            if (statistic.Value != 0)
             {
-                SetValue(value / observedStatistic.Value);
+                SetValue(value / statistic.Value);
             }
             else if (--zeroes == 0)
             {
@@ -34,7 +30,7 @@ namespace Integral.Statistics
             }
         }
 
-        private void Change(int previousValue, int currentValue)
+        protected override void Change(int previousValue, int currentValue)
         {
             if (currentValue != 0)
             {
