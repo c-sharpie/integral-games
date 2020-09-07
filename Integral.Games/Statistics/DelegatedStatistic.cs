@@ -1,9 +1,10 @@
-﻿using Integral.Publishers;
+﻿using Integral.Observers;
+using Integral.Publishers;
 using Integral.Subscribers;
 
 namespace Integral.Statistics
 {
-    public sealed class DelegatedStatistic : ObservedStatistic, Subscriber<int>
+    public sealed class DelegatedStatistic : ValueObserver<int>, ObservedStatistic, Subscriber<int>
     {
         public DelegatedStatistic(Publisher<int> publisher, int value = default) : base(value) => publisher.OnPublish += OnPublished;
 

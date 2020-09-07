@@ -1,8 +1,6 @@
-﻿using Integral.Observers;
-
-namespace Integral.Statistics
+﻿namespace Integral.Statistics
 {
-    public interface Statistic : Observer<int>
+    public interface Statistic
     {
         int Value { get; }
     }

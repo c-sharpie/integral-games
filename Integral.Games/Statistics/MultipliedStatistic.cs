@@ -1,27 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Integral.Observers;
 
 namespace Integral.Statistics
 {
-    public sealed class MultipliedStatistic : AggregateStatistic
+    public sealed class MultipliedStatistic : ValueObserver<int>, AggregateStatistic
     {
         private int zeroes;
 
         private int value = 1;
 
-        public MultipliedStatistic()
+        public void Register(ObservedStatistic observedStatistic)
         {
-        }
-
-        public MultipliedStatistic(IEnumerable<Statistic> statistics) : base(statistics)
-        {
-        }
-
-        public override void Register(Statistic statistic)
-        {
-            statistic.OnChange += Change;
-            if (statistic.Value != 0)
+            observedStatistic.OnChange += Change;
+            if (observedStatistic.Value != 0)
             {
-                SetValue(value * statistic.Value);
+                SetValue(value * observedStatistic.Value);
             }
             else if (++zeroes == 1)
             {
@@ -29,12 +21,12 @@ namespace Integral.Statistics
             }
         }
 
-        public override void Unregister(Statistic statistic)
+        public void Unregister(ObservedStatistic observedStatistic)
         {
-            statistic.OnChange -= Change;
-            if (statistic.Value != 0)
+            observedStatistic.OnChange -= Change;
+            if (observedStatistic.Value != 0)
             {
-                SetValue(value / statistic.Value);
+                SetValue(value / observedStatistic.Value);
             }
             else if (--zeroes == 0)
             {

@@ -1,27 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Integral.Observers;
 
 namespace Integral.Statistics
 {
-    public sealed class SummedStatistic : AggregateStatistic
+    public sealed class SummedStatistic : ValueObserver<int>, AggregateStatistic
     {
-        public SummedStatistic()
+        public void Register(ObservedStatistic observedStatistic)
         {
+            observedStatistic.OnChange += Change;
+            Value += observedStatistic.Value;
         }
 
-        public SummedStatistic(IEnumerable<Statistic> statistics) : base(statistics)
+        public void Unregister(ObservedStatistic observedStatistic)
         {
-        }
-
-        public override void Register(Statistic statistic)
-        {
-            statistic.OnChange += Change;
-            Value += statistic.Value;
-        }
-
-        public override void Unregister(Statistic statistic)
-        {
-            statistic.OnChange -= Change;
-            Value -= statistic.Value;
+            observedStatistic.OnChange -= Change;
+            Value -= observedStatistic.Value;
         }
 
         private void Change(int previousValue, int currentValue) => Value += currentValue - previousValue;

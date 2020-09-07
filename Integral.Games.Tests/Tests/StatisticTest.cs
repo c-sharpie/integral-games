@@ -14,11 +14,14 @@ namespace Integral.Tests
             GenericPublisher<int> experiencePublisher = new GenericPublisher<int>();
             GenericPublisher<int> healthMultiplierPublisher = new GenericPublisher<int>();
 
-            Statistic experience = new DelegatedStatistic(experiencePublisher, 1000);
-            Statistic level = new CalculatedStatistic(new TestLevelFormula(), experience);
+            ObservedStatistic experience = new DelegatedStatistic(experiencePublisher, 1000);
+            ObservedStatistic level = new CalculatedStatistic(new TestLevelFormula(), experience);
 
-            Statistic healthMultiplier = new DelegatedStatistic(healthMultiplierPublisher, 200);
-            Statistic health = new MultipliedStatistic(new[] { level, healthMultiplier });
+            ObservedStatistic healthMultiplier = new DelegatedStatistic(healthMultiplierPublisher, 200);
+
+            AggregateStatistic health = new MultipliedStatistic();
+            health.Register(level);
+            health.Register(healthMultiplier);
 
             Assert.AreEqual(level.Value, 4);
             Assert.AreEqual(health.Value, level.Value * 200);
