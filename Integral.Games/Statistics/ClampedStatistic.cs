@@ -1,27 +1,26 @@
 ﻿using System;
-using Integral.Observers;
 
 namespace Integral.Statistics
 {
-    public sealed class ClampedStatistic : ValueObserver<int>, ObservedStatistic
+    public sealed class ClampedStatistic : TransientStatistic, Statistic
     {
-        private readonly ObservedStatistic min, max, main;
+        private readonly ReadOnlyStatistic value, min, max;
 
-        public ClampedStatistic(ObservedStatistic min, ObservedStatistic max, ObservedStatistic main)
+        public ClampedStatistic(ObservedStatistic value, ObservedStatistic min, ObservedStatistic max)
         {
+            this.value = value;
             this.min = min;
             this.max = max;
-            this.main = main;
 
+            value.OnChange += ChangeValue;
             min.OnChange += ChangeMin;
             max.OnChange += ChangeMax;
-            main.OnChange += ChangeMain;
         }
 
-        private void ChangeMin(int previousValue, int currentValue) => Value = Math.Max(currentValue, main.Value);
+        private void ChangeValue(int previousValue, int currentValue) => Value = Math.Clamp(currentValue, min.Value, max.Value);
 
-        private void ChangeMax(int previousValue, int currentValue) => Value = Math.Min(currentValue, main.Value);
+        private void ChangeMin(int previousValue, int currentValue) => Value = Math.Max(currentValue, value.Value);
 
-        private void ChangeMain(int previousValue, int currentValue) => Value = Math.Clamp(currentValue, min.Value, max.Value);
+        private void ChangeMax(int previousValue, int currentValue) => Value = Math.Min(currentValue, value.Value);
     }
 }

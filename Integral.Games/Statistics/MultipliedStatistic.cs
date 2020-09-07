@@ -6,7 +6,7 @@
 
         private int value = 1;
 
-        public override void Register(Statistic statistic)
+        public override void Register(ReadOnlyStatistic statistic)
         {
             if (statistic.Value != 0)
             {
@@ -18,7 +18,7 @@
             }
         }
 
-        public override void Unregister(Statistic statistic)
+        public override void Unregister(ReadOnlyStatistic statistic)
         {
             if (statistic.Value != 0)
             {

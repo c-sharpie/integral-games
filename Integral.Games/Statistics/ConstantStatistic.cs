@@ -1,6 +1,6 @@
 ﻿namespace Integral.Statistics
 {
-    public sealed class ConstantStatistic : Statistic
+    public sealed class ConstantStatistic : ReadOnlyStatistic
     {
         public ConstantStatistic(int value = default) => Value = value;
 

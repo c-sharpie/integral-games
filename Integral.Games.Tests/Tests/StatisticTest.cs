@@ -14,10 +14,10 @@ namespace Integral.Tests
             GenericPublisher<int> experiencePublisher = new GenericPublisher<int>();
             GenericPublisher<int> healthMultiplierPublisher = new GenericPublisher<int>();
 
-            ObservedStatistic experience = new DelegatedStatistic(experiencePublisher, 1000);
+            ObservedStatistic experience = new TransientStatistic(experiencePublisher, 1000);
             ObservedStatistic level = new CalculatedStatistic(new TestLevelFormula(), experience);
 
-            ObservedStatistic healthMultiplier = new DelegatedStatistic(healthMultiplierPublisher, 200);
+            ObservedStatistic healthMultiplier = new TransientStatistic(healthMultiplierPublisher, 200);
 
             AggregateStatistic health = new MultipliedStatistic();
             health.Register(level);

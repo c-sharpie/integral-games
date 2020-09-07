@@ -2,7 +2,7 @@
 
 namespace Integral.Statistics
 {
-    public interface ObservedStatistic : Statistic, Observer<int>
+    public interface ObservedStatistic : ReadOnlyStatistic, Observer<int>
     {
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Integral.Statistics
 {
-    public interface AggregateStatistic : ObservedStatistic, Registry<ObservedStatistic>, Registry<Statistic>
+    public interface AggregateStatistic : ObservedStatistic, Registry<ObservedStatistic>, Registry<ReadOnlyStatistic>
     {
     }
 }

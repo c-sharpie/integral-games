@@ -7,18 +7,18 @@ namespace Integral.Statistics
         public void Register(ObservedStatistic observedStatistic)
         {
             observedStatistic.OnChange += Change;
-            Register((Statistic)observedStatistic);
+            Register((ReadOnlyStatistic)observedStatistic);
         }
 
         public void Unregister(ObservedStatistic observedStatistic)
         {
             observedStatistic.OnChange -= Change;
-            Register((Statistic)observedStatistic);
+            Register((ReadOnlyStatistic)observedStatistic);
         }
 
-        public abstract void Register(Statistic statistic);
+        public abstract void Register(ReadOnlyStatistic statistic);
 
-        public abstract void Unregister(Statistic statistic);
+        public abstract void Unregister(ReadOnlyStatistic statistic);
 
         protected abstract void Change(int previousValue, int currentValue);
     }
