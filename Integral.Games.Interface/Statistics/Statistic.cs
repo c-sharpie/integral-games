@@ -2,6 +2,6 @@
 {
     public interface Statistic
     {
-        int Value { get; set; }
+        float Value { get; set; }
     }
 }

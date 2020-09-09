@@ -3,16 +3,16 @@ using Integral.Observers;
 
 namespace Integral.Statistics
 {
-    public sealed class CalculatedStatistic : ValueObserver<int>, ObservedStatistic
+    public sealed class CalculatedStatistic : ValueObserver<float>, ObservedStatistic
     {
-        private readonly DeltaFormula<int> deltaFormula;
+        private readonly DeltaFormula<float> deltaFormula;
 
-        public CalculatedStatistic(DeltaFormula<int> deltaFormula, ObservedStatistic observedStatistic, int value = default) : base(deltaFormula.Evaluate(value, observedStatistic.Value))
+        public CalculatedStatistic(DeltaFormula<float> deltaFormula, ObservedStatistic observedStatistic, int value = default) : base(deltaFormula.Evaluate(value, observedStatistic.Value))
         {
             this.deltaFormula = deltaFormula;
             observedStatistic.OnChange += Change;
         }
 
-        private void Change(int previousValue, int currentValue) => Value = deltaFormula.Evaluate(previousValue, currentValue);
+        private void Change(float previousValue, float currentValue) => Value = deltaFormula.Evaluate(previousValue, currentValue);
     }
 }

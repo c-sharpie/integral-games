@@ -2,6 +2,6 @@
 {
     public interface ReadOnlyStatistic
     {
-        int Value { get; }
+        float Value { get; }
     }
 }

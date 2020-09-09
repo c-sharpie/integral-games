@@ -2,9 +2,9 @@
 
 namespace Integral.Statistics
 {
-    public class TransientStatistic : ValueObserver<int>, ObservedStatistic, Statistic
+    public class TransientStatistic : ValueObserver<float>, ObservedStatistic, Statistic
     {
-        public TransientStatistic(int value = default) : base(value)
+        public TransientStatistic(float value = default) : base(value)
         {
         }
     }

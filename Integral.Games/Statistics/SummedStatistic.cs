@@ -6,6 +6,6 @@
 
         public override void Unregister(ReadOnlyStatistic statistic) => Value -= statistic.Value;
 
-        protected override void Change(int previousValue, int currentValue) => Value += currentValue - previousValue;
+        protected override void Change(float previousValue, float currentValue) => Value += currentValue - previousValue;
     }
 }

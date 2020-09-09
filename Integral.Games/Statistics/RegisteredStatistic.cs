@@ -2,7 +2,7 @@
 
 namespace Integral.Statistics
 {
-    public abstract class RegisteredStatistic : ValueObserver<int>, AggregateStatistic
+    public abstract class RegisteredStatistic : ValueObserver<float>, AggregateStatistic
     {
         public void Register(ObservedStatistic observedStatistic)
         {
@@ -20,6 +20,6 @@ namespace Integral.Statistics
 
         public abstract void Unregister(ReadOnlyStatistic statistic);
 
-        protected abstract void Change(int previousValue, int currentValue);
+        protected abstract void Change(float previousValue, float currentValue);
     }
 }

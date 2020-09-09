@@ -4,7 +4,7 @@
     {
         private int zeroes;
 
-        private int value = 1;
+        private float value = 1;
 
         public override void Register(ReadOnlyStatistic statistic)
         {
@@ -30,7 +30,7 @@
             }
         }
 
-        protected override void Change(int previousValue, int currentValue)
+        protected override void Change(float previousValue, float currentValue)
         {
             if (currentValue != 0)
             {
@@ -54,7 +54,7 @@
             }
         }
 
-        private void SetValue(int value)
+        private void SetValue(float value)
         {
             this.value = value;
             if (zeroes == 0)

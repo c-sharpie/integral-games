@@ -17,10 +17,10 @@ namespace Integral.Statistics
             max.OnChange += ChangeMax;
         }
 
-        private void ChangeValue(int previousValue, int currentValue) => Value = Math.Clamp(currentValue, min.Value, max.Value);
+        private void ChangeValue(float previousValue, float currentValue) => Value = Math.Clamp(currentValue, min.Value, max.Value);
 
-        private void ChangeMin(int previousValue, int currentValue) => Value = Math.Max(currentValue, value.Value);
+        private void ChangeMin(float previousValue, float currentValue) => Value = Math.Max(currentValue, value.Value);
 
-        private void ChangeMax(int previousValue, int currentValue) => Value = Math.Min(currentValue, value.Value);
+        private void ChangeMax(float previousValue, float currentValue) => Value = Math.Min(currentValue, value.Value);
     }
 }
