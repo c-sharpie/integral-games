@@ -2,33 +2,14 @@
 {
     public sealed class MultipliedStatistic : RegisteredStatistic
     {
-        private int zeroes;
-
-        private float value = 1;
-
-        public override void Register(ReadOnlyStatistic statistic)
+        public MultipliedStatistic()
+            : base(1)
         {
-            if (statistic.Value != 0)
-            {
-                SetValue(value * statistic.Value);
-            }
-            else if (++zeroes == 1)
-            {
-                Value = 0;
-            }
         }
 
-        public override void Unregister(ReadOnlyStatistic statistic)
-        {
-            if (statistic.Value != 0)
-            {
-                SetValue(value / statistic.Value);
-            }
-            else if (--zeroes == 0)
-            {
-                Value = value;
-            }
-        }
+        public override void Register(ReadOnlyStatistic statistic) => Change(0, statistic.Value);
+
+        public override void Unregister(ReadOnlyStatistic statistic) => Change(statistic.Value, 0);
 
         protected override void Change(float previousValue, float currentValue)
         {
@@ -36,30 +17,16 @@
             {
                 if (previousValue == 0)
                 {
-                    zeroes--;
-                    SetValue(value * currentValue);
+                    Value *= currentValue;
                 }
                 else
                 {
-                    SetValue(value / previousValue * currentValue);
+                    Value = Value / previousValue * currentValue;
                 }
             }
-            else
+            else if (previousValue != 0)
             {
-                value /= previousValue;
-                if (++zeroes == 1)
-                {
-                    Value = 0;
-                }
-            }
-        }
-
-        private void SetValue(float value)
-        {
-            this.value = value;
-            if (zeroes == 0)
-            {
-                Value = value;
+                Value /= previousValue;
             }
         }
     }

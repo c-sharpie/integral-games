@@ -4,6 +4,11 @@ namespace Integral.Statistics
 {
     public abstract class RegisteredStatistic : ValueObserver<float>, AggregateStatistic
     {
+        public RegisteredStatistic(float value = default)
+            : base(value)
+        {
+        }
+
         public void Register(ObservedStatistic observedStatistic)
         {
             observedStatistic.OnChange += Change;
