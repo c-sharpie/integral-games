@@ -2,7 +2,7 @@
 
 namespace Integral.Conditions
 {
-    public sealed class ToggleCondition : PublishedCondition
+    public class ToggleCondition : PublishedCondition
     {
         public ToggleCondition(Notifier notifier) => notifier.OnNotify += Toggle;
 

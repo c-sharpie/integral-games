@@ -3,7 +3,7 @@ using Integral.Observers;
 
 namespace Integral.Statistics
 {
-    public sealed class CalculatedStatistic : ValueObserver<float>, ObservedStatistic
+    public class CalculatedStatistic : ValueObserver<float>, ObservedStatistic
     {
         private readonly DeltaFormula<float> deltaFormula;
 

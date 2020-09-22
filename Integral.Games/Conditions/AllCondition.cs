@@ -2,7 +2,7 @@
 
 namespace Integral.Conditions
 {
-    public sealed class AllCondition : PublishedCondition, DirectAggregate<Condition>
+    public class AllCondition : PublishedCondition, DirectAggregate<Condition>
     {
         private int active, count;
 

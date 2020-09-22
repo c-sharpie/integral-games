@@ -1,6 +1,6 @@
 ﻿namespace Integral.Conditions
 {
-    public sealed class InverseCondition : PublishedCondition
+    public class InverseCondition : PublishedCondition
     {
         public InverseCondition(Condition condition) => condition.OnPublish += Inverse;
 

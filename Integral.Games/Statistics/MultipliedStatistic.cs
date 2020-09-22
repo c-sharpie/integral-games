@@ -1,6 +1,6 @@
 ﻿namespace Integral.Statistics
 {
-    public sealed class MultipliedStatistic : RegisteredStatistic
+    public class MultipliedStatistic : RegisteredStatistic
     {
         public MultipliedStatistic()
             : base(1)

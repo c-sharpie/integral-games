@@ -2,7 +2,7 @@
 
 namespace Integral.Statistics
 {
-    public sealed class ClampedStatistic : TransientStatistic
+    public class ClampedStatistic : TransientStatistic
     {
         private readonly ReadOnlyStatistic min, max, main;
 

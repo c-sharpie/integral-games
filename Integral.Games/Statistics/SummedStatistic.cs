@@ -1,6 +1,6 @@
 ﻿namespace Integral.Statistics
 {
-    public sealed class SummedStatistic : RegisteredStatistic
+    public class SummedStatistic : RegisteredStatistic
     {
         public override void Register(ReadOnlyStatistic statistic) => Value += statistic.Value;
 
