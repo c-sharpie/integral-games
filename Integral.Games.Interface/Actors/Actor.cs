@@ -1,6 +1,6 @@
-﻿namespace Adonai.Actors
+﻿namespace Integral.Actors
 {
-    public interface Actor
+    public interface Actor 
     {
     }
 }

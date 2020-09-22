@@ -1,5 +1,4 @@
-﻿using Adonai.Actors;
-using Integral.Formulae;
+﻿using Integral.Formulae;
 using Integral.Statistics;
 
 namespace Integral.Actors
