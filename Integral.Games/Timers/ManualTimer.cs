@@ -1,6 +1,6 @@
 ﻿namespace Integral.Timers
 {
-    public sealed class ManualTimer : IntervalTimer
+    public class ManualTimer : IntervalTimer
     {
         private readonly double interval;
 
