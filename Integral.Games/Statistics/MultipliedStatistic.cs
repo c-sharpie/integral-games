@@ -2,11 +2,6 @@
 {
     public class MultipliedStatistic : RegisteredStatistic
     {
-        public MultipliedStatistic()
-            : base(1)
-        {
-        }
-
         public override void Register(ReadOnlyStatistic statistic) => Change(0, statistic.Value);
 
         public override void Unregister(ReadOnlyStatistic statistic) => Change(statistic.Value, 0);
@@ -17,7 +12,7 @@
             {
                 if (previousValue == 0)
                 {
-                    Value *= currentValue;
+                    Value = Value == 0 ? currentValue : Value * currentValue;
                 }
                 else
                 {
