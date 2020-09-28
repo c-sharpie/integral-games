@@ -1,6 +1,5 @@
-﻿using Integral.Abilities;
-using Integral.Actors;
-using Integral.Items;
+﻿using Integral.Formulae;
+using Integral.Statistics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Integral.Tests
@@ -11,17 +10,27 @@ namespace Integral.Tests
         [TestMethod]
         public void Test()
         {
-            TestActor testActor = new TestActor();
-            testActor.Experience = 1000;
+            TransientStatistic experience = new TransientStatistic(1000);
+            CalculatedStatistic level = new CalculatedStatistic(new TestLevelFormula(), experience);
 
-            TestAbility testAbility = new TestAbility();
-            testAbility.Apply(testActor);
+            MultipliedStatistic maxHealthLevelMultiplier = new MultipliedStatistic();
+            maxHealthLevelMultiplier.Register(level);
+            maxHealthLevelMultiplier.Register(new ConstantStatistic(200));
 
-            TestItem testItem = new TestItem();
-            testItem.Bind(testActor);
+            SummedStatistic maxHealthValues = new SummedStatistic();
+            maxHealthValues.Register(maxHealthLevelMultiplier);
 
-            Assert.AreEqual(testActor.Level, 4);
-            Assert.AreEqual(testActor.MaxHealth, testActor.Level * 200);
+            SummedStatistic maxHealthMultipliers = new SummedStatistic();
+
+            MultipliedStatistic maxHealth = new MultipliedStatistic();
+            maxHealth.Register(maxHealthValues);
+            maxHealth.Register(maxHealthMultipliers);
+
+            TransientStatistic health = new TransientStatistic(maxHealth.Value);
+            ClampedStatistic clampedHealth = new ClampedStatistic(new ConstantStatistic(0), maxHealth, health);
+
+            Assert.AreEqual(level.Value, 4);
+            Assert.AreEqual(clampedHealth.Value, level.Value * 200);
         }
     }
 }

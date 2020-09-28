@@ -20,6 +20,8 @@ namespace Integral.Statistics
             this.min = min;
             this.max = max;
             this.main = main;
+
+            ChangeValue(0, main.Value);
         }
 
         private void ChangeMin(float previousValue, float currentValue) => Value = Math.Max(currentValue, main.Value);
