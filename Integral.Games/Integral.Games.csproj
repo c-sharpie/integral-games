@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <Description>An implementation of common game logic and systems.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Integral" Version="0.0.4" />
+    <PackageReference Include="Integral" Version="0.0.9" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Integral.Games.Interface\Integral.Games.Interface.csproj" />
