@@ -4,7 +4,7 @@
     <Description>An implementation of common game logic and systems.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Integral" Version="0.0.9" />
+    <PackageReference Include="Integral" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Integral.Games.Interface\Integral.Games.Interface.csproj" />
